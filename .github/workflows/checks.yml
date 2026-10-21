@@ -46,3 +46,5 @@ jobs:
           stopifnot(requireNamespace("limma", quietly = TRUE))
       - name: Run independent synthetic checks with the limma engine
         run: Rscript --vanilla workflows/mirna-differential-expression-and-target-enrichment/tests/run-tests.R --all
+      - name: Run independent microarray preparation checks
+        run: Rscript --vanilla workflows/microarray-preprocessing-and-parallel-expression-analysis/tests/run-tests.R --all

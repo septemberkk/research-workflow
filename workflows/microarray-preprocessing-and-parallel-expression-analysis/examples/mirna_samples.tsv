@@ -1,0 +1,7 @@
+sample_id	group	include
+R_C2	Control	yes
+R_T2	Treatment	yes
+R_C1	Control	yes
+R_T1	Treatment	yes
+R_X1	OutsideScope	no
+R_X2	OutsideScope	no
