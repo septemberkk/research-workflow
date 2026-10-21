@@ -47,8 +47,8 @@ defaults or entries in exported metadata.
 
 All tables are UTF-8 TSV with headers, unquoted fields, consistent column counts
 and no blank physical lines. Identifiers are preserved as case-sensitive strings.
-Blank IDs, boundary whitespace, formula-like prefixes and invisible formatting
-characters are rejected; aliases are not repaired or inferred.
+Blank IDs, boundary whitespace, embedded double quotes, formula-like prefixes and
+invisible formatting characters are rejected; aliases are not repaired or inferred.
 
 - Expression: `miRNA_id` followed by numeric sample columns. Values must already
   be on the log2 expression scale; declaring the scale is the caller's responsibility.

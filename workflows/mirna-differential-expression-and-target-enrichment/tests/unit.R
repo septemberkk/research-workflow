@@ -34,6 +34,16 @@ for (value in c("", " A", "A ", "=formula", "+formula", "@formula", "-formula", 
 test("literal numeric-looking identifiers are not coerced", {
   mirna_safe_cells(c("001", "NA", "MIR_001"), "identifier")
 })
+for (value in c('"=payload"', '""', 'MIR_"A"')) {
+  test("quoted fields cannot bypass spreadsheet safety", {
+    expect_error(mirna_safe_cells(value, "identifier"), "quoted TSV")
+  })
+}
+for (value in c("\u00a0=payload", "\u3000=payload", "MIR_A\u00a0")) {
+  test("Unicode boundary whitespace is rejected without rewriting identifiers", {
+    expect_error(mirna_safe_cells(value, "identifier"), "boundary whitespace")
+  })
+}
 test("bundled tables retain exact metadata sample order", {
   fixture <- fixture_inputs()
   fixture$expression <- fixture$expression[, c(1, 7, 5, 3, 6, 2, 4)]

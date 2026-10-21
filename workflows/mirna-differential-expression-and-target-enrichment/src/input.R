@@ -2,7 +2,7 @@ mirna_fail <- function(message) stop(message, call. = FALSE)
 
 mirna_text <- function(value, label, empty = FALSE) {
   if (!is.character(value) || length(value) != 1L || is.na(value) ||
-      (!empty && !nzchar(value)) || value != trimws(value) ||
+      (!empty && !nzchar(value)) || value != trimws(value, whitespace = "[\\h\\v]") ||
       grepl("[[:cntrl:]]", value)) {
     mirna_fail(paste0(label, " must be nonblank single-line text without boundary whitespace."))
   }
@@ -12,6 +12,9 @@ mirna_text <- function(value, label, empty = FALSE) {
 mirna_safe_cells <- function(values, label, empty = FALSE) {
   for (value in values) {
     mirna_text(value, label, empty = empty)
+    if (grepl('"', value, fixed = TRUE)) {
+      mirna_fail(paste0(label, " must not contain quoted TSV fields."))
+    }
     if (grepl("^[=+@-]", value) ||
         grepl("[\u200b-\u200f\u202a-\u202e\u2060-\u206f\ufeff]", value, perl = TRUE)) {
       mirna_fail(paste0(label, " contains formula-like or invisible formatting text."))
