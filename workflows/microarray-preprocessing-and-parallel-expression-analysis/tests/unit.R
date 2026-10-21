@@ -18,18 +18,18 @@ test("plot request must be scalar logical", {
   expect_error(array_none_config(plots = "yes"), "Plots")
   expect_error(array_none_config(plots = NA), "Plots")
 })
-for (value in c(" A", "A ", "\u00a0A", "A\u3000", "A\nB", "")) {
+for (value in c(" A", "A ", "\u00a0A", "A\u3000", "A\nB", "A\u0085B", "")) {
   test("invalid whitespace or blank identifiers are rejected without trimming", {
     expect_error(array_cells(value, "identifier"), "plain")
   })
 }
-for (value in c('"=payload"', "=payload", "+payload", "@payload", "-payload", "A\u200b", "A\u00ad", "A\u061c", "A\u2028B")) {
+for (value in c('"=payload"', "=payload", "+payload", "@payload", "-payload", "A\u200b", "A\u00ad", "A\u061c", "A\u2028B", "A\u2029B")) {
   test("quoted, formula-like and Unicode formatting text cannot enter exports", {
     expect_error(array_cells(value, "identifier"), "unsafe")
   })
 }
 test("numeric-looking and missing-value-looking strings remain literal IDs", {
-  array_cells(c("001", "NA", "MIR_EXAMPLE"), "identifier")
+  array_cells(c("001", "NA", "MIR_EXAMPLE", "GENE_\u03b1"), "identifier")
 })
 test("selected columns follow explicit metadata order", {
   result <- array_prepared()

@@ -3,7 +3,8 @@ array_fail <- function(message) stop(message, call. = FALSE)
 array_text <- function(value, label, empty = FALSE) {
   if (!is.character(value) || length(value) != 1L || is.na(value) ||
       (!empty && !nzchar(value)) ||
-      value != trimws(value, whitespace = "[\\h\\v]") || grepl("[[:cntrl:]]", value)) {
+      value != trimws(value, whitespace = "[\\h\\v]") ||
+      grepl("\\p{Cc}", enc2utf8(value), perl = TRUE)) {
     array_fail(paste0(label, " must be plain single-line text without boundary whitespace."))
   }
   value
