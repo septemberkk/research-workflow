@@ -25,3 +25,24 @@ jobs:
         run: python -m pip install -r workflows/functional-module-evidence-mapping/requirements.txt
       - name: Run synthetic integration tests
         run: python -m unittest discover -s workflows/functional-module-evidence-mapping/tests -v
+
+  mirna:
+    name: miRNA workflow checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: r-lib/actions/setup-r@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05 # v2
+        with:
+          r-version: '4.5'
+      - name: Install isolated analysis dependencies
+        shell: Rscript {0}
+        run: |
+          options(repos = c(CRAN = "https://cloud.r-project.org"))
+          if (!requireNamespace("BiocManager", quietly = TRUE)) install.packages("BiocManager")
+          BiocManager::install("limma", ask = FALSE, update = FALSE)
+          stopifnot(requireNamespace("limma", quietly = TRUE))
+      - name: Run independent synthetic checks with the limma engine
+        run: Rscript --vanilla workflows/mirna-differential-expression-and-target-enrichment/tests/run-tests.R --all

@@ -1,0 +1,8 @@
+miRNA_id	target_gene_id	database	evidence_type	reference	review
+MIR_EXAMPLE_01	GENE_EXAMPLE_01	synthetic	illustrative	example-only	include
+MIR_EXAMPLE_01	GENE_EXAMPLE_02	synthetic	illustrative	example-only	include
+MIR_EXAMPLE_02	GENE_EXAMPLE_02	synthetic	illustrative	example-only	include
+MIR_EXAMPLE_11	GENE_EXAMPLE_02	synthetic	illustrative	example-only	include
+MIR_EXAMPLE_12	GENE_EXAMPLE_03	synthetic	illustrative	example-only	include
+MIR_EXAMPLE_21	GENE_EXAMPLE_04	synthetic	illustrative	example-only	include
+MIR_EXAMPLE_03	GENE_EXAMPLE_05	synthetic	illustrative	example-only	exclude

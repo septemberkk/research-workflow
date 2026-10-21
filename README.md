@@ -5,6 +5,7 @@ Independent research-analysis workflows with explicit inputs, methods and output
 | Workflow | Purpose | Scope |
 | --- | --- | --- |
 | [RNA-seq Differential Expression & Functional Enrichment](workflows/rna-seq-differential-expression-and-functional-enrichment/) | Two-group edgeR differential expression, an optional heatmap, and gene lists for downstream enrichment. | Independent biological samples in two groups; identifier mapping and GO/KEGG analysis are separate steps. |
+| [miRNA Differential Expression & Target Enrichment](workflows/mirna-differential-expression-and-target-enrichment/) | Log2-expression limma analysis, optional figures, reviewed target evidence and gene-list handoff. | Independent two-group comparisons; target queries, identifier conversion and GO/KEGG calculations are separate steps. |
 | [Functional Module Evidence Mapping](workflows/functional-module-evidence-mapping/) | Reviewed term-to-module mappings, traceable gene annotations, heatmap matrices and Cytoscape-ready node tables. | Uses reviewed enrichment exports; it does not discover modules, run enrichment analysis or build Cytoscape networks. |
 
 Each workflow contains its own source, method notes, input contract and synthetic
